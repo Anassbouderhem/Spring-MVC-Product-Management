@@ -21,25 +21,25 @@ public class GestionDesProduitsApplication {
         return args -> {
             productRepository.save(Product.builder()
                     .name("Computer")
-                    .Category("Electronique")
+                    .category("Electronique")
                     .price(7000)
                     .quantity(20)
                     .build());
             productRepository.save(Product.builder()
                     .name("Printer")
-                    .Category("Electronique")
+                    .category("Electronique")
                     .price(1000)
                     .quantity(45)
                     .build());
             productRepository.save(Product.builder()
                     .name("TV")
-                    .Category("Electromenager")
+                    .category("Electromenager")
                     .price(5000)
                     .quantity(10)
                     .build());
             productRepository.save(Product.builder()
                     .name("Smart Phone")
-                    .Category("Electronique")
+                    .category("Electronique")
                     .price(13000)
                     .quantity(40)
                     .build());

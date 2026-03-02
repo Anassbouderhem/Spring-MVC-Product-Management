@@ -24,7 +24,7 @@ public class Product {
     private String name;
     @NotEmpty
     @Size(min = 2, max = 60)
-    private String Category;
+    private String category;
     @Min(0)
     private double price;
     @Min(1)

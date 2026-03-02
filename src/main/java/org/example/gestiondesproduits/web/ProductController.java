@@ -1,13 +1,17 @@
 package org.example.gestiondesproduits.web;
 
+import jakarta.validation.Valid;
 import org.example.gestiondesproduits.entities.Product;
 import org.example.gestiondesproduits.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.naming.Binding;
 import java.util.List;
 import java.util.LongSummaryStatistics;
 
@@ -21,9 +25,24 @@ public class ProductController {
         model.addAttribute("productList",products);
         return "products";
     }
+    @GetMapping("/")
+    public String home(){
+        return "redirect:/index";
+    }
+    @GetMapping("/newProduct")
+    public String newProduct(Model model){
+        model.addAttribute("product", new Product());
+        return "new-product";
+    }
     @GetMapping("/delete")
     public String delete(@RequestParam(name = "id") Long id){
         productRepository.deleteById(id);
+        return "redirect:/index";
+    }
+    @PostMapping("/saveProduct")
+    public String saveProduct(@Valid Product product, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) return "new-product";
+        productRepository.save(product);
         return "redirect:/index";
     }
 }
