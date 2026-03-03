@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(ar->ar.requestMatchers("/admin/**","/delete/**").hasRole("ADMIN"))
                 .authorizeHttpRequests(ar->ar.requestMatchers("/public/**").permitAll())
                 .authorizeHttpRequests(ar->ar.anyRequest().authenticated())
+                .exceptionHandling(eh->eh.accessDeniedPage("/notAuthorized"))
                 .build();
 
 
