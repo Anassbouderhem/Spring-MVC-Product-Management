@@ -1,5 +1,6 @@
 package org.example.gestiondesproduits.web;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.gestiondesproduits.entities.Product;
 import org.example.gestiondesproduits.repository.ProductRepository;
@@ -48,5 +49,14 @@ public class ProductController {
     @GetMapping("/notAuthorized")
     public String notAuthorized(){
         return "notAuthorized";
+    }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "login";
     }
 }
