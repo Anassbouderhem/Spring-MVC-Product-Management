@@ -59,4 +59,23 @@ public class ProductController {
         session.invalidate();
         return "login";
     }
+    @GetMapping("/admin/editProduct")
+    public String edit(@RequestParam(name = "id") Long id, Model model){
+        Product product=productRepository.findById(id).orElse(null);
+        model.addAttribute("product",product);
+        return "editproduct";
+    }
+    @GetMapping("/user/search")
+    public String search(@RequestParam(name = "keyword") String keyword, Model model){
+        List <Product> products;
+        if (keyword.isEmpty()){
+            products=productRepository.findAll();
+        }else{
+            products=productRepository.findByNameContainsIgnoreCaseOrCategoryContainingIgnoreCase(keyword,keyword);
+        }
+        model.addAttribute("productList",products);
+        model.addAttribute("keyword",keyword);
+        return "products";
+    }
+
 }
