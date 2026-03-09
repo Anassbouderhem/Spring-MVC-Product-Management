@@ -87,4 +87,21 @@ public class ProductController {
         return "products";
     }
 
+    @GetMapping("/admin/dashboard")
+    public String dashboard(Model model){
+        long totalProducts=productRepository.countProducts();
+        double avgPrice=productRepository.avgPrice();
+        double maxPrice=productRepository.maxPrice();
+        double minPrice=productRepository.minPrice();
+        long totalCategory=productRepository.countCategory();
+
+        model.addAttribute("totalProducts", totalProducts);
+        model.addAttribute("avgPrice", avgPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("totalCategory",totalCategory);
+
+        return "dashboard";
+    }
+
 }
