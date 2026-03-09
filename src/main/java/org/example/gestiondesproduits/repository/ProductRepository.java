@@ -21,4 +21,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     double minPrice();
     @Query("select count(distinct p.category) from Product p")
     long countCategory();
+    @Query("select p.category, count(p) from Product p group by p.category")
+    List<Object[]> countProductsByCategory();
 }

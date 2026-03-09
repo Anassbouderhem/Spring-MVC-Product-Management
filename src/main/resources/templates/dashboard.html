@@ -8,58 +8,79 @@
     <title>Dashboard</title>
 </head>
 <body>
-<div  class="container mt-4" layout:fragment="content1">
+<div class="container mt-4" layout:fragment="content1">
 
-    <h2 class="text-center">Product Dashboard</h2>
+    <h2 class="text-center mb-4 fw-bold text-primary">Product Dashboard</h2>
 
-    <div class="row mt-4">
+    <div class="row g-4">
 
-        <div class="col-md-3">
-            <div class="card bg-primary text-white">
-                <div class="card-body">
-                    <h5>Total Products</h5>
-                    <h3 th:text="${totalProducts}"></h3>
+        <div class="col-sm-6 col-md-3">
+            <div class="card bg-primary text-white shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-box-seam fs-2 mb-2"></i>
+                    <h5 class="card-title">Total Products</h5>
+                    <h3 th:text="${totalProducts}">0</h3>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card bg-primary text-white">
-                <div class="card-body">
-                    <h5>Total Categories</h5>
-                    <h3 th:text="${totalCategory}"></h3>
+        <div class="col-sm-6 col-md-3">
+            <div class="card bg-info text-white shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-tags fs-2 mb-2"></i>
+                    <h5 class="card-title">Total Categories</h5>
+                    <h3 th:text="${totalCategory}">0</h3>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card bg-success text-white">
-                <div class="card-body">
-                    <h5>Average Price</h5>
-                    <h3 th:text="${avgPrice}"></h3>
+        <div class="col-sm-6 col-md-3">
+            <div class="card bg-success text-white shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-currency-dollar fs-2 mb-2"></i>
+                    <h5 class="card-title">Average Price</h5>
+                    <h3 th:text="${avgPrice}">0</h3>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card bg-warning text-white">
-                <div class="card-body">
-                    <h5>Max Price</h5>
-                    <h3 th:text="${maxPrice}"></h3>
+        <div class="col-sm-6 col-md-3">
+            <div class="card bg-warning text-white shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-arrow-up-circle fs-2 mb-2"></i>
+                    <h5 class="card-title">Max Price</h5>
+                    <h3 th:text="${maxPrice}">0</h3>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card bg-danger text-white">
-                <div class="card-body">
-                    <h5>Min Price</h5>
-                    <h3 th:text="${minPrice}"></h3>
+        <div class="col-sm-6 col-md-3">
+            <div class="card bg-danger text-white shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-arrow-down-circle fs-2 mb-2"></i>
+                    <h5 class="card-title">Min Price</h5>
+                    <h3 th:text="${minPrice}">0</h3>
                 </div>
             </div>
         </div>
 
     </div>
+    <div class="mt-4">
+        <table class="table table-striped table-hover table-bordered align-middle shadow-sm">
+            <thead class="table-dark text-center">
+            <tr>
+                <th>Category</th>
+                <th>Number of Products</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pc : ${productsByCategory}" class="text-center align-middle">
+                    <td th:text="${pc[0]}"></td>
+                    <td th:text="${pc[1]}"></td>
+                </tr>
+            </tbody>
+        </table>
+</div>
 </div>
 
 </body>

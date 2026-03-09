@@ -94,12 +94,14 @@ public class ProductController {
         double maxPrice=productRepository.maxPrice();
         double minPrice=productRepository.minPrice();
         long totalCategory=productRepository.countCategory();
+        List<Object[]> productsByCategory = productRepository.countProductsByCategory();
 
         model.addAttribute("totalProducts", totalProducts);
         model.addAttribute("avgPrice", avgPrice);
         model.addAttribute("maxPrice", maxPrice);
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("totalCategory",totalCategory);
+        model.addAttribute("productsByCategory",productsByCategory);
 
         return "dashboard";
     }
