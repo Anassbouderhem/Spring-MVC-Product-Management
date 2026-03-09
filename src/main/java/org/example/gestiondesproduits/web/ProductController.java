@@ -5,6 +5,8 @@ import jakarta.validation.Valid;
 import org.example.gestiondesproduits.entities.Product;
 import org.example.gestiondesproduits.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,9 +23,16 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
     @GetMapping("/user/index")
-    public String index(Model model){
-        List<Product> products = productRepository.findAll();
-        model.addAttribute("productList",products);
+    public String index(Model model,
+                        @RequestParam(name="page", defaultValue = "0")int page,
+                        @RequestParam(name = "size", defaultValue = "6")int size,
+                        @RequestParam(name = "keyword", defaultValue = "")String keyword){
+        Page<Product>productsPage = productRepository.findByNameContains(keyword, PageRequest.of(page,size));
+        model.addAttribute("productList", productsPage.getContent());
+        int[] pages = new int[productsPage.getTotalPages()];
+        model.addAttribute("pages", pages);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("keyword", keyword);
         return "products";
     }
     @GetMapping("/")
